@@ -9,8 +9,22 @@ class studentManagementSystem {
 	public static  int [] totalArray = new int[0];
 	public static double [] averageArray = new double [0];
 	public static int [] rankArray = new int [0];
+	public static int nextIndex = 0;
 	
-//------------------- Extend Arrays ---------------------------------
+	
+//------------------- check student Id exist or not -----------------------
+	
+	public static boolean isIdExist(String stuId){
+		for (int i = 0; i <nextIndex ; i++){
+			if(studentIdArray[i].equals(stuId)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	
+//------------------- Extend Arrays ------------------------------------
 
 	public static void extendArrays(){
 		String[] tempStudentIdArray = new String [studentIdArray.length+1];
@@ -42,7 +56,7 @@ class studentManagementSystem {
 	}
 	
 	
-//------------------- Best in Database Management ----------------------------
+//------------------- Best in Database Management ----------------------
 
 	public static void bestInDbms(){
 		System.out.println("-------------------------------------------------");
@@ -52,7 +66,7 @@ class studentManagementSystem {
 	}
 	
 	
-//------------------- Best in Programming Fundementals -------------------------
+//------------------- Best in Programming Fundementals -----------------
 
 	public static void  bestInPrf(){
 		System.out.println("-------------------------------------------------");
@@ -62,7 +76,7 @@ class studentManagementSystem {
 	}
 
 	
-//------------------- Print Students Ranks -------------------------
+//------------------- Print Students Ranks -----------------------------
 
 	public static void printStudentRarks(){
 		System.out.println("-------------------------------------------------");
@@ -72,7 +86,7 @@ class studentManagementSystem {
 	}
 	
 	
-//------------------- Print Students Details -------------------------
+//------------------- Print Students Details ---------------------------
 	
 	public static void printStudentDetails(){
 		System.out.println("-------------------------------------------------");
@@ -81,7 +95,7 @@ class studentManagementSystem {
 		System.out.println();
 	}
 	
-//------------------- Delete Student -------------------------
+//------------------- Delete Student -----------------------------------
 
 	public static void deleteStudent(){
 		System.out.println("-------------------------------------------------");
@@ -91,7 +105,7 @@ class studentManagementSystem {
 	}
 	
 	
-//------------------- update Marks ----------------------------
+//------------------- update Marks -------------------------------------
 
 	public static void updateMarks(){
 		System.out.println("-------------------------------------------------");
@@ -101,7 +115,7 @@ class studentManagementSystem {
 	}
 	
 	
-//------------------- Update Student Details -------------------------	
+//------------------- Update Student Details ---------------------------	
 
 	public static void updateStudentDetails(){
 		System.out.println("-------------------------------------------------");
@@ -111,7 +125,7 @@ class studentManagementSystem {
 	}
 
 	
-//------------------- add Marks -------------------------
+//------------------- add Marks ----------------------------------------
 
 	public static void addMarks(){
 		System.out.println("-------------------------------------------------");
@@ -121,7 +135,7 @@ class studentManagementSystem {
 	}
 	
 	
-//------------------- add New Student With Marks -------------------------
+//------------------- add New Student With Marks -----------------------
 
 	public static void addNewStudentWithMarks(){
 		System.out.println("-------------------------------------------------");
@@ -130,7 +144,7 @@ class studentManagementSystem {
 		System.out.println();
 	}
 	
-//------------------- add New Student -------------------------	
+//------------------- add New Student ----------------------------------	
 
 	public static void addNewStudent(){
 		System.out.println("-------------------------------------------------");
@@ -138,12 +152,44 @@ class studentManagementSystem {
 		System.out.println("-------------------------------------------------");
 		System.out.println();
 		
-		
-		
+		while(true){
+			String stuId;
+			while(true){
+				System.out.print("Enter Student ID\t : ");
+				stuId = input.next();
+			
+				if(isIdExist(stuId)){
+					System.out.println("The Student ID already exists.");
+				}else{
+					break;
+				}
+					
+			}
+			
+			System.out.print("Enter Student Name : ");
+			String stuName = input.next();
+			
+			extendArrays();
+			
+			studentIdArray[nextIndex] = stuId;
+			studentNameArray[nextIndex] = stuName;
+			
+			nextIndex++;
+			
+			System.out.println("Student has been added successfully.");
+			System.out.print("Do you want to add a new student (Y/n) ? ");
+			char ch = input.next().charAt(0);
+			
+			if(Character.toLowerCase(ch) == 'n'){
+				break;
+			}
+		}
+		clearConsole();
+		homePage();
 	}
 
 
-//------------------- home page -------------------------
+//------------------- home page ----------------------------------------
 
 	public static void homePage(){
 		System.out.println("-------------------------------------------------");
@@ -220,7 +266,7 @@ class studentManagementSystem {
 	}
 
 
-//------------------ clear console ---------------------
+//------------------ clear console -------------------------------------
 	public final static void clearConsole() { 
 	try { 
 		final String os = System.getProperty("os.name"); 
@@ -238,7 +284,7 @@ class studentManagementSystem {
 
 
 
-//------------------- main method -----------------------
+//------------------- main method --------------------------------------
 	public static void main (String[] args) {
 		homePage();
 	}
