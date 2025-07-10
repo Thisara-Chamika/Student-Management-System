@@ -10,7 +10,36 @@ class studentManagementSystem {
 	public static double [] averageArray = new double [0];
 	public static int [] rankArray = new int [0];
 	
-	
+//------------------- Extend Arrays ---------------------------------
+
+	public static void extendArrays(){
+		String[] tempStudentIdArray = new String [studentIdArray.length+1];
+		String[] tempStudentNameArray = new String [studentNameArray.length+1];
+		int[] tempPrfMarksArray = new int [prfMarksArray.length+1];
+		int[] tempDbmsMarksArray = new int [dbmsMarksArray.length+1];
+		int[] tempTotalArray = new int [totalArray.length+1];
+		double[] tempAverageArray = new double [averageArray.length+1];
+		int[] tempRankArray = new int [rankArray.length+1];
+		
+		for (int i = 0; i < studentIdArray.length; i++){
+			tempStudentIdArray[i] = studentIdArray[i];
+			tempStudentNameArray[i] = studentNameArray[i];
+			tempPrfMarksArray[i] = prfMarksArray[i];
+			tempDbmsMarksArray[i] = dbmsMarksArray[i];
+			tempTotalArray[i] = totalArray[i];
+			tempAverageArray[i] = averageArray[i];
+			tempRankArray[i] = rankArray[i];
+		}
+		
+		studentIdArray = tempStudentIdArray;
+		studentNameArray = tempStudentNameArray;
+		prfMarksArray = tempPrfMarksArray;
+		dbmsMarksArray = tempDbmsMarksArray;
+		totalArray = tempTotalArray;
+		averageArray = tempAverageArray;
+		rankArray = tempRankArray;
+		
+	}
 	
 	
 //------------------- Best in Database Management ----------------------------
@@ -108,6 +137,7 @@ class studentManagementSystem {
 		System.out.println("|               ADD NEW STUDENTS                |");
 		System.out.println("-------------------------------------------------");
 		System.out.println();
+		
 		
 		
 	}
