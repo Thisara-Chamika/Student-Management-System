@@ -12,7 +12,26 @@ class studentManagementSystem {
 	public static int nextIndex = 0;
 	
 	
-//------------------- check student Id exist or not -----------------------
+//------------------ getValidMarks -------------------------------------
+
+	public static int getValidMarks(String subject){
+		int marks;
+		
+		while(true){
+			System.out.print(subject+"Marks : ");
+			marks = input.nextInt();
+			
+			if (marks>= 0 && marks <= 100){
+				return marks;
+			}else{
+				System.out.println("Invalid Marks, Please enter Correct Marks.");
+			}
+		}
+		
+	}
+	
+	
+//------------------- check student Id exist or not --------------------
 	
 	public static boolean isIdExist(String stuId){
 		for (int i = 0; i <nextIndex ; i++){
@@ -142,6 +161,54 @@ class studentManagementSystem {
 		System.out.println("|          ADD NEW STUDENT WITH MARKS           |");
 		System.out.println("-------------------------------------------------");
 		System.out.println();
+		
+		while(true){
+			String stuId;
+			while(true){
+				System.out.print("Enter Student ID\t: ");
+				stuId = input.next();
+			
+				if(isIdExist(stuId)){
+					System.out.println("The Student ID already exists.");
+				}else{
+					break;
+				}
+					
+			}
+			
+			System.out.print("Enter Student Name\t: ");
+			String stuName = input.next();
+			
+		
+		int prfMarks = getValidMarks("Programming Fundementals ");		
+		int dbmsMarks = getValidMarks("Database Management System ");		
+		
+		extendArrays();
+		
+		studentIdArray[nextIndex] = stuId;
+		studentNameArray[nextIndex] = stuName;
+		prfMarksArray[nextIndex] = prfMarks;
+		dbmsMarksArray[nextIndex] = dbmsMarks;
+				
+		nextIndex++;
+		
+		System.out.println(Arrays.toString(studentIdArray));
+			System.out.println(Arrays.toString(studentNameArray));
+			System.out.println(Arrays.toString(prfMarksArray));
+			System.out.println(Arrays.toString(dbmsMarksArray));
+			
+			System.out.println("Student has been added successfully.");
+			System.out.print("Do you want to add a new student (Y/n) ? ");
+			char ch = input.next().charAt(0);
+			
+			if(Character.toLowerCase(ch) == 'n'){
+				break;
+			}
+			clearConsole();
+			addNewStudentWithMarks();
+		}
+		clearConsole();
+		homePage();
 	}
 	
 //------------------- add New Student ----------------------------------	
@@ -155,7 +222,7 @@ class studentManagementSystem {
 		while(true){
 			String stuId;
 			while(true){
-				System.out.print("Enter Student ID\t : ");
+				System.out.print("Enter Student ID\t: ");
 				stuId = input.next();
 			
 				if(isIdExist(stuId)){
@@ -166,15 +233,23 @@ class studentManagementSystem {
 					
 			}
 			
-			System.out.print("Enter Student Name : ");
+			System.out.print("Enter Student Name\t: ");
 			String stuName = input.next();
 			
 			extendArrays();
 			
 			studentIdArray[nextIndex] = stuId;
 			studentNameArray[nextIndex] = stuName;
+			prfMarksArray[nextIndex] = 0;
+			dbmsMarksArray[nextIndex] = 0;
+			
 			
 			nextIndex++;
+			
+			System.out.println(Arrays.toString(studentIdArray));
+			System.out.println(Arrays.toString(studentNameArray));
+			System.out.println(Arrays.toString(prfMarksArray));
+			System.out.println(Arrays.toString(dbmsMarksArray));
 			
 			System.out.println("Student has been added successfully.");
 			System.out.print("Do you want to add a new student (Y/n) ? ");
@@ -183,6 +258,8 @@ class studentManagementSystem {
 			if(Character.toLowerCase(ch) == 'n'){
 				break;
 			}
+			clearConsole();
+			addNewStudent();
 		}
 		clearConsole();
 		homePage();
@@ -206,6 +283,7 @@ class studentManagementSystem {
 		System.out.print("\t\t[8] Print Student Ranks");
 		System.out.print("\n[9] Best in Programing Fundamentals");
 		System.out.print("\t[10] Best in Database Management System");
+		System.out.print("\n[11] Exit");
 		System.out.println();
 		System.out.print("\nEnter an Option to Continue > ");
 		int option  = input.nextInt();
@@ -260,6 +338,10 @@ class studentManagementSystem {
 			case 10:
 				clearConsole();
 				bestInDbms();
+				break;
+				
+			case 11:
+				System.exit(0);
 				break;
 		}
 	
