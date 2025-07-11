@@ -12,7 +12,52 @@ class studentManagementSystem {
 	public static int nextIndex = 0;
 	
 	
-//------------------ getValidMarks -------------------------------------
+//----------------- is Marks Added ------------------------------------	
+	
+	public static boolean isMarksAdded(String stuId){
+		int index = findStudentIndex(stuId);
+		if (index == -1) {
+			return false;
+		}else{
+			return prfMarksArray[index]!=0 && dbmsMarksArray[index]!=0;
+		}
+	}
+	
+	
+//------------------ Find Student Index --------------------------------
+
+	public static int findStudentIndex(String stuId){
+		for (int i = 0; i <nextIndex ; i++){
+			if (studentIdArray[i].equals(stuId)){
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	
+//------------------ get Valid Student Id-------------------------------
+	
+	
+	public static String getValidStudentId(){
+		String stuId;
+		while(true){
+			System.out.print("Enter Student ID : ");
+			stuId = input.next();
+			if (isIdExist(stuId)){
+				return stuId;
+			}else{
+				System.out.print("Invalid Student ID. Do you want to search again ?  (Y/n): ");
+				char ch = input.next().charAt(0);
+				if(Character.toLowerCase(ch)=='n'){
+					return null;
+				}
+			}
+		}
+	}
+	
+	
+//------------------ get Valid Marks -----------------------------------
 
 	public static int getValidMarks(String subject){
 		int marks;
@@ -151,8 +196,54 @@ class studentManagementSystem {
 		System.out.println("|                 ADD MARKS                     |");
 		System.out.println("-------------------------------------------------");
 		System.out.println();
+		
+		while (true){
+			String stuId = getValidStudentId();
+			if (stuId == null){
+				break;
+			}
+			
+			int index = findStudentIndex(stuId);
+			
+			if (isMarksAdded(stuId)){
+				System.out.println("This student's marks have been already added.");
+                System.out.println("If you want to update the marks, please use [5] Update Marks option.");
+			}else{
+				System.out.println("Student Name : "+studentNameArray[index]);
+				
+				
+				int prfMarks = getValidMarks("Programming Fundementals ");		
+				int dbmsMarks = getValidMarks("Database Management System ");		
+		
+		
+				prfMarksArray[index] = prfMarks;
+				dbmsMarksArray[index] = dbmsMarks;
+				
+				
+				System.out.println(Arrays.toString(studentIdArray));
+				System.out.println(Arrays.toString(studentNameArray));
+				System.out.println(Arrays.toString(prfMarksArray));
+				System.out.println(Arrays.toString(dbmsMarksArray));
+				
+				System.out.println("Student's Marks have been added successfully.");
+			}
+			
+				System.out.print("Do you want to add marks for another student (Y/n)?  ");
+				char ch = input.next().charAt(0);
+			
+				if(Character.toLowerCase(ch) == 'n'){
+					break;
+				}
+				clearConsole();
+				addMarks();
+			}
+			clearConsole();
+			homePage();
+			
+			
 	}
-	
+		
+
 	
 //------------------- add New Student With Marks -----------------------
 
@@ -180,22 +271,19 @@ class studentManagementSystem {
 			String stuName = input.next();
 			
 		
-		int prfMarks = getValidMarks("Programming Fundementals ");		
-		int dbmsMarks = getValidMarks("Database Management System ");		
+			int prfMarks = getValidMarks("Programming Fundementals ");		
+			int dbmsMarks = getValidMarks("Database Management System ");		
+			
+			extendArrays();
+			
+			studentIdArray[nextIndex] = stuId;
+			studentNameArray[nextIndex] = stuName;
+			prfMarksArray[nextIndex] = prfMarks;
+			dbmsMarksArray[nextIndex] = dbmsMarks;
+					
+			nextIndex++;
 		
-		extendArrays();
 		
-		studentIdArray[nextIndex] = stuId;
-		studentNameArray[nextIndex] = stuName;
-		prfMarksArray[nextIndex] = prfMarks;
-		dbmsMarksArray[nextIndex] = dbmsMarks;
-				
-		nextIndex++;
-		
-		System.out.println(Arrays.toString(studentIdArray));
-			System.out.println(Arrays.toString(studentNameArray));
-			System.out.println(Arrays.toString(prfMarksArray));
-			System.out.println(Arrays.toString(dbmsMarksArray));
 			
 			System.out.println("Student has been added successfully.");
 			System.out.print("Do you want to add a new student (Y/n) ? ");
@@ -242,14 +330,8 @@ class studentManagementSystem {
 			studentNameArray[nextIndex] = stuName;
 			prfMarksArray[nextIndex] = 0;
 			dbmsMarksArray[nextIndex] = 0;
-			
-			
+
 			nextIndex++;
-			
-			System.out.println(Arrays.toString(studentIdArray));
-			System.out.println(Arrays.toString(studentNameArray));
-			System.out.println(Arrays.toString(prfMarksArray));
-			System.out.println(Arrays.toString(dbmsMarksArray));
 			
 			System.out.println("Student has been added successfully.");
 			System.out.print("Do you want to add a new student (Y/n) ? ");
@@ -341,6 +423,7 @@ class studentManagementSystem {
 				break;
 				
 			case 11:
+				clearConsole();
 				System.exit(0);
 				break;
 		}
