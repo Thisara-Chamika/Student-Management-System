@@ -186,6 +186,38 @@ class studentManagementSystem {
 		System.out.println("|            UPDATE STUDENT DETAILS             |");
 		System.out.println("-------------------------------------------------");
 		System.out.println();
+		
+		while (true){
+			String stuId = getValidStudentId();
+			if (stuId == null){
+				break;
+			}
+			
+			int index = findStudentIndex(stuId);
+			
+			System.out.println("Student Name : "+studentNameArray[index]);
+			
+			
+			System.out.print("Enter the new Student Name : ");
+			String stuName = input.next();
+			
+			
+			studentNameArray[index] = stuName; 
+			System.out.println("Student Details has been updated successfully.");
+			System.out.println(Arrays.toString(studentIdArray));
+			System.out.println(Arrays.toString(studentNameArray));
+			
+			System.out.print("Do you want to update another student details (Y/n)?  ");
+				char ch = input.next().charAt(0);
+			
+				if(Character.toLowerCase(ch) == 'n'){
+					break;
+				}
+				clearConsole();
+				updateStudentDetails();
+			}
+			clearConsole();
+			homePage();
 	}
 
 	
