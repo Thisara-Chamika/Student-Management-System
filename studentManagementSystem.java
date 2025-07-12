@@ -11,8 +11,40 @@ class studentManagementSystem {
 	public static int [] rankArray = new int [0];
 	public static int nextIndex = 0;
 	
+
+//------------------ narrow Arrays -------------------------------------
+
+	public static void narrowArray(){
+		String[] tempStudentIdArray = new String[nextIndex];
+		String[] tempStudentNameArray = new String[nextIndex];
+		int[] tempPrfMarksArray = new int [nextIndex];
+		int[] tempDbmsMarksArray = new int[nextIndex];
+		int[] tempTotalArray = new int[nextIndex];
+		double[] tempAverageArray = new double[nextIndex];
+		int[] tempRankArray = new int [nextIndex];
+		
+		for (int i = 0; i < nextIndex; i++){
+			tempStudentIdArray[i] = studentIdArray[i];
+			tempStudentNameArray[i] = studentNameArray[i];
+			tempPrfMarksArray[i] = prfMarksArray[i];
+			tempDbmsMarksArray[i] = dbmsMarksArray[i];
+			tempTotalArray[i] = totalArray[i];
+			tempAverageArray[i] = averageArray[i];
+			tempRankArray[i] = rankArray[i];
+		}
+		
+		studentIdArray = tempStudentIdArray;
+		studentNameArray = tempStudentNameArray;
+		prfMarksArray = tempPrfMarksArray;
+		dbmsMarksArray = tempDbmsMarksArray;
+		totalArray = tempTotalArray;
+		averageArray = tempAverageArray;
+		rankArray = tempRankArray;
+	}
+
+
 	
-//----------------- is Marks Added ------------------------------------	
+//----------------- is Marks Added -------------------------------------	
 	
 	public static boolean isMarksAdded(String stuId){
 		int index = findStudentIndex(stuId);
@@ -36,7 +68,7 @@ class studentManagementSystem {
 	}
 
 	
-//------------------ get Valid Student Id-------------------------------
+//------------------ get Valid Student Id (for searching)---------------
 	
 	
 	public static String getValidStudentId(){
@@ -163,9 +195,50 @@ class studentManagementSystem {
 
 	public static void deleteStudent(){
 		System.out.println("-------------------------------------------------");
-		System.out.println("|                 DELETE MARKS                  |");
+		System.out.println("|                 DELETE STUDENT                |");
 		System.out.println("-------------------------------------------------");
 		System.out.println();
+		
+		
+		while(true){
+			String stuId = getValidStudentId();
+			if (stuId == null){
+				break;
+			}
+			
+			int index = findStudentIndex(stuId);
+			
+			for (int i = index; i < nextIndex - 1; i++){
+				studentIdArray[i] = studentIdArray[i+1];
+				studentNameArray[i] = studentNameArray[i+1];
+				prfMarksArray[i] = prfMarksArray[i+1];
+				dbmsMarksArray[i] = dbmsMarksArray[i+1];
+			}
+			
+			nextIndex--;
+			
+			narrowArray();
+			
+			System.out.println(Arrays.toString(studentIdArray));
+			System.out.println(Arrays.toString(studentNameArray));
+			System.out.println(Arrays.toString(prfMarksArray));
+			System.out.println(Arrays.toString(dbmsMarksArray));
+			
+			
+			System.out.println("Student has been deleted successfully.");
+			System.out.print("Do you want to delete another student (Y/n)?  ");
+				char ch = input.next().charAt(0);
+			
+				if(Character.toLowerCase(ch) == 'n'){
+					break;
+				}
+				clearConsole();
+				deleteStudent();
+		}
+		clearConsole();
+		homePage();
+		
+		
 	}
 	
 	
