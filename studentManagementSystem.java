@@ -176,6 +176,55 @@ class studentManagementSystem {
 		System.out.println("|                 UPDATE MARKS                  |");
 		System.out.println("-------------------------------------------------");
 		System.out.println();
+		
+		while(true){
+			String stuId = getValidStudentId();
+			if (stuId == null){
+				break;
+			}
+			
+			int index = findStudentIndex(stuId);
+			
+			System.out.println("Student Name : "+studentNameArray[index]);
+			
+			
+			if (!isMarksAdded(stuId)){
+				System.out.println("This Student's Marks yet to be Added.");
+				
+			}else{
+				
+				System.out.println("Programming Fundamentals Marks : "+prfMarksArray[index]);
+				System.out.println("Database Management System Marks : "+dbmsMarksArray[index]);
+				
+				int prfMarks = getValidMarks("Programming Fundementals ");		
+				int dbmsMarks = getValidMarks("Database Management System ");
+				
+				
+				prfMarksArray[index] = prfMarks;
+				dbmsMarksArray[index] = dbmsMarks;
+				
+				System.out.println("Student's Marks have been updated successfully.");
+				
+				
+				System.out.println(Arrays.toString(studentIdArray));
+				System.out.println(Arrays.toString(studentNameArray));
+				System.out.println(Arrays.toString(prfMarksArray));
+				System.out.println(Arrays.toString(dbmsMarksArray));
+			}
+			
+			System.out.print("Do you want to update another student's Marks (Y/n)?  ");
+				char ch = input.next().charAt(0);
+			
+				if(Character.toLowerCase(ch) == 'n'){
+					break;
+				}
+				clearConsole();
+				updateMarks();
+		}
+		clearConsole();
+		homePage();
+		
+		
 	}
 	
 	
@@ -199,13 +248,11 @@ class studentManagementSystem {
 			
 			
 			System.out.print("Enter the new Student Name : ");
-			String stuName = input.next();
+			String stuNewName = input.next();
 			
 			
-			studentNameArray[index] = stuName; 
+			studentNameArray[index] = stuNewName; 
 			System.out.println("Student Details has been updated successfully.");
-			System.out.println(Arrays.toString(studentIdArray));
-			System.out.println(Arrays.toString(studentNameArray));
 			
 			System.out.print("Do you want to update another student details (Y/n)?  ");
 				char ch = input.next().charAt(0);
@@ -251,11 +298,6 @@ class studentManagementSystem {
 				prfMarksArray[index] = prfMarks;
 				dbmsMarksArray[index] = dbmsMarks;
 				
-				
-				System.out.println(Arrays.toString(studentIdArray));
-				System.out.println(Arrays.toString(studentNameArray));
-				System.out.println(Arrays.toString(prfMarksArray));
-				System.out.println(Arrays.toString(dbmsMarksArray));
 				
 				System.out.println("Student's Marks have been added successfully.");
 			}
