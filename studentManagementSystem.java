@@ -12,6 +12,59 @@ class studentManagementSystem {
 	public static int nextIndex = 0;
 	
 
+//------------------------- find Rank -----------------------------
+
+
+//------------------------- sort Arrays -----------------------------------
+
+	public static void sortArrays(){
+		for(int i=nextIndex-1; i >= 0 ; i--){
+			for(int j=0; j<i; j++){
+				if(totalArray[j] < totalArray[j+1]){
+					String tempStudentIdArray = studentIdArray[j];
+					studentIdArray[j]=studentIdArray[j+1];
+					studentIdArray[j+1]=tempStudentIdArray;
+					
+					String tempStudentNameArray =studentNameArray[j];
+					studentNameArray[j]=studentNameArray[j+1];
+					studentNameArray[j+1]=tempStudentNameArray;
+					
+					int tempPrfMarksArray = prfMarksArray[j];
+					prfMarksArray[j]=prfMarksArray[j+1];
+					prfMarksArray[j+1]=tempPrfMarksArray;
+					
+					int tempDbmsMarksArray = dbmsMarksArray[j];
+					dbmsMarksArray[j]=dbmsMarksArray[j+1];
+					dbmsMarksArray[j+1]=tempDbmsMarksArray;
+					
+					int tempTotalArray = totalArray[j];
+					totalArray[j]=totalArray[j+1];
+					totalArray[j+1]=tempTotalArray;
+					
+					double tempAverageArray = averageArray[j];
+					averageArray[j]=averageArray[j+1];
+					averageArray[j+1]=tempAverageArray;
+				}
+			}
+		}
+	}
+
+//-------------------------- get Average -------------------------------
+
+	public static double getAverage(int total){
+		double average = total/2;
+		return average;
+	}
+
+
+//---------------------------- get Total -------------------------------
+
+	public static int getTotal(int prfMarks, int dbmsMarks){
+		int total = prfMarks + dbmsMarks;
+		return total;
+	}
+
+
 //------------------ narrow Arrays -------------------------------------
 
 	public static void narrowArray(){
@@ -41,7 +94,6 @@ class studentManagementSystem {
 		averageArray = tempAverageArray;
 		rankArray = tempRankArray;
 	}
-
 
 	
 //----------------- is Marks Added -------------------------------------	
@@ -189,7 +241,59 @@ class studentManagementSystem {
 		System.out.println("|            PRINT STUDENT DETAILS              |");
 		System.out.println("-------------------------------------------------");
 		System.out.println();
+		
+		while(true){
+			String stuId = getValidStudentId();
+			if (stuId == null){
+				break;
+			}
+			
+			int index = findStudentIndex(stuId);
+			
+			System.out.println("Student Name : "+studentNameArray[index]);
+			
+			
+			if (!isMarksAdded(stuId)){
+				System.out.println("\nMarks yet to be Added.");
+				
+				System.out.print("Do you want to search another student details(Y/n)?  ");
+				char ch = input.next().charAt(0);
+			
+				if(Character.toLowerCase(ch) == 'n'){
+					clearConsole();
+					homePage();
+				}
+				clearConsole();
+				printStudentDetails();
+				
+			}else{
+				
+				System.out.println("+---------------------------------+---------+");
+				System.out.println("|Programming Fundamentals Marks   |\t  "+prfMarksArray[index]+"|");
+				System.out.println("|Database Management System Marks |\t  "+dbmsMarksArray[index]+"|");
+				System.out.println("|Total Marks                      |\t "+totalArray[index]+"|");
+				System.out.println("|Avg. Marks                       |\t"+averageArray[index]+"|");
+			//	System.out.println("|Rank                             |\t\t""place|");
+				System.out.println("+---------------------------------+---------+");
+				
+				System.out.print("\nDo you want to search another student details(Y/n)?  ");
+				char ch = input.next().charAt(0);
+			
+				if(Character.toLowerCase(ch) == 'n'){
+					clearConsole();
+					homePage();
+				}
+				clearConsole();
+				printStudentDetails();
+			
+			}
+				
+		}
+		clearConsole();
+		homePage();	
 	}
+	
+	
 	
 //------------------- Delete Student -----------------------------------
 
@@ -213,16 +317,23 @@ class studentManagementSystem {
 				studentNameArray[i] = studentNameArray[i+1];
 				prfMarksArray[i] = prfMarksArray[i+1];
 				dbmsMarksArray[i] = dbmsMarksArray[i+1];
+				totalArray[i] = totalArray[i+1];
+				averageArray[i] = averageArray[i+1];
 			}
 			
 			nextIndex--;
 			
 			narrowArray();
+			sortArrays();
 			
+			//--------------------------------------------------
 			System.out.println(Arrays.toString(studentIdArray));
 			System.out.println(Arrays.toString(studentNameArray));
 			System.out.println(Arrays.toString(prfMarksArray));
 			System.out.println(Arrays.toString(dbmsMarksArray));
+			System.out.println(Arrays.toString(totalArray));
+			System.out.println(Arrays.toString(averageArray));
+			//---------------------------------------------------
 			
 			
 			System.out.println("Student has been deleted successfully.");
@@ -271,18 +382,27 @@ class studentManagementSystem {
 				
 				int prfMarks = getValidMarks("Programming Fundementals ");		
 				int dbmsMarks = getValidMarks("Database Management System ");
-				
+				int total = getTotal(prfMarks,dbmsMarks);
+				double average = getAverage(total);
 				
 				prfMarksArray[index] = prfMarks;
 				dbmsMarksArray[index] = dbmsMarks;
+				totalArray[index] = total;
+				averageArray[index] = average;
+				
+				sortArrays();
 				
 				System.out.println("Student's Marks have been updated successfully.");
 				
 				
+				//--------------------------------------------------
 				System.out.println(Arrays.toString(studentIdArray));
 				System.out.println(Arrays.toString(studentNameArray));
 				System.out.println(Arrays.toString(prfMarksArray));
 				System.out.println(Arrays.toString(dbmsMarksArray));
+				System.out.println(Arrays.toString(totalArray));
+				System.out.println(Arrays.toString(averageArray));
+				//---------------------------------------------------
 			}
 			
 			System.out.print("Do you want to update another student's Marks (Y/n)?  ");
@@ -366,11 +486,23 @@ class studentManagementSystem {
 				
 				int prfMarks = getValidMarks("Programming Fundementals ");		
 				int dbmsMarks = getValidMarks("Database Management System ");		
-		
+				int total = getTotal(prfMarks,dbmsMarks);
+				double average = getAverage(total);
 		
 				prfMarksArray[index] = prfMarks;
 				dbmsMarksArray[index] = dbmsMarks;
+				totalArray[index] = total;
+				averageArray[index] = average;
 				
+				sortArrays();
+				//--------------------------------------------------
+				System.out.println(Arrays.toString(studentIdArray));
+				System.out.println(Arrays.toString(studentNameArray));
+				System.out.println(Arrays.toString(prfMarksArray));
+				System.out.println(Arrays.toString(dbmsMarksArray));
+				System.out.println(Arrays.toString(totalArray));
+				System.out.println(Arrays.toString(averageArray));
+				//---------------------------------------------------
 				
 				System.out.println("Student's Marks have been added successfully.");
 			}
@@ -389,7 +521,6 @@ class studentManagementSystem {
 			
 			
 	}
-		
 
 	
 //------------------- add New Student With Marks -----------------------
@@ -419,7 +550,9 @@ class studentManagementSystem {
 			
 		
 			int prfMarks = getValidMarks("Programming Fundementals ");		
-			int dbmsMarks = getValidMarks("Database Management System ");		
+			int dbmsMarks = getValidMarks("Database Management System ");
+			int total = getTotal(prfMarks,dbmsMarks);
+			double average = getAverage(total);		
 			
 			extendArrays();
 			
@@ -427,9 +560,21 @@ class studentManagementSystem {
 			studentNameArray[nextIndex] = stuName;
 			prfMarksArray[nextIndex] = prfMarks;
 			dbmsMarksArray[nextIndex] = dbmsMarks;
-					
+			totalArray[nextIndex] = total;
+			averageArray[nextIndex] = average;
+			
+				
 			nextIndex++;
+			sortArrays();
 		
+			//--------------------------------------------------
+			System.out.println(Arrays.toString(studentIdArray));
+			System.out.println(Arrays.toString(studentNameArray));
+			System.out.println(Arrays.toString(prfMarksArray));
+			System.out.println(Arrays.toString(dbmsMarksArray));
+			System.out.println(Arrays.toString(totalArray));
+			System.out.println(Arrays.toString(averageArray));
+			//---------------------------------------------------
 		
 			
 			System.out.println("Student has been added successfully.");
@@ -477,8 +622,11 @@ class studentManagementSystem {
 			studentNameArray[nextIndex] = stuName;
 			prfMarksArray[nextIndex] = 0;
 			dbmsMarksArray[nextIndex] = 0;
-
+			totalArray[nextIndex] = 0;
+			averageArray[nextIndex] = 0;
+			
 			nextIndex++;
+			sortArrays();
 			
 			System.out.println("Student has been added successfully.");
 			System.out.print("Do you want to add a new student (Y/n) ? ");
