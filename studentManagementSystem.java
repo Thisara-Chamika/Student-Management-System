@@ -14,6 +14,18 @@ class studentManagementSystem {
 
 //------------------------- find Rank -----------------------------
 
+	public static void findRank(){
+		for (int i = 0; i < nextIndex; i++) {
+		int rank = 1;
+			for (int j = 0; j < nextIndex; j++) {
+				if (totalArray[j] > totalArray[i]) {
+					rank++;
+				}
+			}
+			rankArray[i] = rank;
+		}                                                                                                                                                               
+	}
+
 
 //------------------------- sort Arrays -----------------------------------
 
@@ -268,13 +280,13 @@ class studentManagementSystem {
 				
 			}else{
 				
-				System.out.println("+---------------------------------+---------+");
-				System.out.println("|Programming Fundamentals Marks   |\t  "+prfMarksArray[index]+"|");
-				System.out.println("|Database Management System Marks |\t  "+dbmsMarksArray[index]+"|");
-				System.out.println("|Total Marks                      |\t "+totalArray[index]+"|");
-				System.out.println("|Avg. Marks                       |\t"+averageArray[index]+"|");
-			//	System.out.println("|Rank                             |\t\t""place|");
-				System.out.println("+---------------------------------+---------+");
+				System.out.println("+---------------------------------+----------+");
+				System.out.println("|Programming Fundamentals Marks   |\t  "+prfMarksArray[index]+" |");
+				System.out.println("|Database Management System Marks |\t  "+dbmsMarksArray[index]+" |");
+				System.out.println("|Total Marks                      |\t "+totalArray[index]+" |");
+				System.out.println("|Avg. Marks                       |\t"+averageArray[index]+" |");
+				System.out.println("|Rank                             |  "+rankArray[index]+"  place|");
+				System.out.println("+---------------------------------+----------+");
 				
 				System.out.print("\nDo you want to search another student details(Y/n)?  ");
 				char ch = input.next().charAt(0);
@@ -325,6 +337,7 @@ class studentManagementSystem {
 			
 			narrowArray();
 			sortArrays();
+			findRank();
 			
 			//--------------------------------------------------
 			System.out.println(Arrays.toString(studentIdArray));
@@ -391,6 +404,7 @@ class studentManagementSystem {
 				averageArray[index] = average;
 				
 				sortArrays();
+				findRank();
 				
 				System.out.println("Student's Marks have been updated successfully.");
 				
@@ -495,6 +509,7 @@ class studentManagementSystem {
 				averageArray[index] = average;
 				
 				sortArrays();
+				findRank();
 				//--------------------------------------------------
 				System.out.println(Arrays.toString(studentIdArray));
 				System.out.println(Arrays.toString(studentNameArray));
@@ -566,6 +581,7 @@ class studentManagementSystem {
 				
 			nextIndex++;
 			sortArrays();
+			findRank();
 		
 			//--------------------------------------------------
 			System.out.println(Arrays.toString(studentIdArray));
