@@ -223,6 +223,29 @@ class studentManagementSystem {
 		System.out.println("|      BEST IN DATABASE MANAGEMENT SYSTEM       |");
 		System.out.println("-------------------------------------------------");
 		System.out.println();
+		System.out.println();
+		
+		
+		System.out.println("+------+-------------------+-------------+------------+");
+		System.out.println("|ID    |Student's Name     |Dbms Marks   |prf Marks   |");
+		System.out.println("+------+-------------------+-------------+------------+");
+		
+		for (int i = 0; i < nextIndex; i++){
+			if (totalArray[i]!=0){
+				System.out.printf("|%6s|%19s|%13d|%12d|",studentIdArray[i],studentNameArray[i],dbmsMarksArray[i],prfMarksArray[i]);
+				System.out.println();
+			}
+		}
+		System.out.print("+------+-------------------+-------------+------------+");
+		System.out.println();
+		
+		System.out.print("\nDo you want to go back to main menu (Y/n)?  ");
+				char ch = input.next().charAt(0);
+			
+				if(Character.toLowerCase(ch) == 'y'){
+					clearConsole();
+					homePage();
+				}
 	}
 	
 	
@@ -233,6 +256,30 @@ class studentManagementSystem {
 		System.out.println("|       BEST IN PROGRAMMING FUNDEMENTALS        |");
 		System.out.println("-------------------------------------------------");
 		System.out.println();
+		System.out.println();
+		
+		
+		System.out.println("+------+-------------------+------------+------------+");
+		System.out.println("|ID    |Student's Name     |Prf Marks   |Dbms Marks  |");
+		System.out.println("+------+-------------------+------------+------------+");
+		
+		for (int i = 0; i < nextIndex; i++){
+			if (totalArray[i]!=0){
+				System.out.printf("|%6s|%19s|%12d|%12d|",studentIdArray[i],studentNameArray[i],prfMarksArray[i],dbmsMarksArray[i]);
+				System.out.println();
+			}
+		}
+		System.out.print("+------+-------------------+------------+------------+");
+		System.out.println();
+		
+		System.out.print("\nDo you want to go back to main menu (Y/n)?  ");
+				char ch = input.next().charAt(0);
+			
+				if(Character.toLowerCase(ch) == 'y'){
+					clearConsole();
+					homePage();
+				}
+		
 	}
 
 	
@@ -303,12 +350,12 @@ class studentManagementSystem {
 			}else{
 				
 				System.out.println("+---------------------------------+----------+");
-				System.out.println("|Programming Fundamentals Marks   |\t  "+prfMarksArray[index]+" |");
-				System.out.println("|Database Management System Marks |\t  "+dbmsMarksArray[index]+" |");
-				System.out.println("|Total Marks                      |\t "+totalArray[index]+" |");
-				System.out.println("|Avg. Marks                       |\t"+averageArray[index]+" |");
-				System.out.println("|Rank                             |  "+rankArray[index]+"  place|");
-				System.out.println("+---------------------------------+----------+");
+				System.out.printf("|Programming Fundamentals Marks   |%10d|",prfMarksArray[index]);
+				System.out.printf("\n|Database Management System Marks |%10d|",dbmsMarksArray[index]);
+				System.out.printf("\n|Total Marks                      |%10d|",totalArray[index]);
+				System.out.printf("\n|Avg. Marks                       |%10.1f|",averageArray[index]);
+				System.out.printf("\n|Rank                             |%3d(place)|",rankArray[index]);
+				System.out.println("\n+---------------------------------+----------+");
 				
 				System.out.print("\nDo you want to search another student details(Y/n)?  ");
 				char ch = input.next().charAt(0);
