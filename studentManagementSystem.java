@@ -240,9 +240,31 @@ class studentManagementSystem {
 
 	public static void printStudentRarks(){
 		System.out.println("-------------------------------------------------");
-		System.out.println("|             PRINT STUDENT RANKS               |");
+		System.out.println("|           PRINT STUDENTS' RANKS               |");
 		System.out.println("-------------------------------------------------");
 		System.out.println();
+		System.out.println();
+		
+		System.out.println("+------+------+-------------------+--------------+--------------+");
+		System.out.println("|Rank  |ID    |Student's Name     |Total Marks   |Avg. Marks    |");
+		System.out.println("+------+------+-------------------+--------------+--------------+");
+		
+		for (int i = 0; i < nextIndex; i++){
+			if (totalArray[i]!=0){
+				System.out.printf("|%6d|%6s|%19s|%14d|%14.1f|",rankArray[i],studentIdArray[i],studentNameArray[i],totalArray[i],averageArray[i]);
+				System.out.println();
+			}
+		}
+		System.out.print("+------+------+-------------------+--------------+--------------+");
+		System.out.println();
+		
+		System.out.print("\nDo you want to go back to main menu (Y/n)?  ");
+				char ch = input.next().charAt(0);
+			
+				if(Character.toLowerCase(ch) == 'y'){
+					clearConsole();
+					homePage();
+				}	
 	}
 	
 	
