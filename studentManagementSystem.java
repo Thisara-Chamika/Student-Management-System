@@ -130,10 +130,8 @@ class studentManagementSystem {
 		}
 		return -1;
 	}
-
-	
+		
 //------------------ get Valid Student Id (for searching)---------------
-	
 	
 	public static String getValidStudentId(){
 		String stuId;
@@ -151,7 +149,6 @@ class studentManagementSystem {
 			}
 		}
 	}
-	
 	
 //------------------ get Valid Marks -----------------------------------
 
@@ -171,7 +168,6 @@ class studentManagementSystem {
 		
 	}
 	
-	
 //------------------- check student Id exist or not --------------------
 	
 	public static boolean isIdExist(String stuId){
@@ -182,7 +178,6 @@ class studentManagementSystem {
 		}
 		return false;
 	}
-	
 	
 //------------------- Extend Arrays ------------------------------------
 
@@ -215,7 +210,6 @@ class studentManagementSystem {
 		
 	}
 	
-	
 //------------------- Best in Database Management ----------------------
 
 	public static void bestInDbms(){
@@ -224,7 +218,6 @@ class studentManagementSystem {
 		System.out.println("-------------------------------------------------");
 		System.out.println();
 		System.out.println();
-		
 		
 		System.out.println("+------+-------------------+-------------+------------+");
 		System.out.println("|ID    |Student's Name     |Dbms Marks   |prf Marks   |");
@@ -248,7 +241,6 @@ class studentManagementSystem {
 				}
 	}
 	
-	
 //------------------- Best in Programming Fundementals -----------------
 
 	public static void  bestInPrf(){
@@ -257,7 +249,6 @@ class studentManagementSystem {
 		System.out.println("-------------------------------------------------");
 		System.out.println();
 		System.out.println();
-		
 		
 		System.out.println("+------+-------------------+------------+------------+");
 		System.out.println("|ID    |Student's Name     |Prf Marks   |Dbms Marks  |");
@@ -374,8 +365,6 @@ class studentManagementSystem {
 		homePage();	
 	}
 	
-	
-	
 //------------------- Delete Student -----------------------------------
 
 	public static void deleteStudent(){
@@ -383,7 +372,6 @@ class studentManagementSystem {
 		System.out.println("|                 DELETE STUDENT                |");
 		System.out.println("-------------------------------------------------");
 		System.out.println();
-		
 		
 		while(true){
 			String stuId = getValidStudentId();
@@ -400,23 +388,13 @@ class studentManagementSystem {
 				dbmsMarksArray[i] = dbmsMarksArray[i+1];
 				totalArray[i] = totalArray[i+1];
 				averageArray[i] = averageArray[i+1];
+				rankArray[i] = rankArray[i+1];
 			}
-			
 			nextIndex--;
 			
 			narrowArray();
 			sortArrays();
 			findRank();
-			
-			//--------------------------------------------------
-			System.out.println(Arrays.toString(studentIdArray));
-			System.out.println(Arrays.toString(studentNameArray));
-			System.out.println(Arrays.toString(prfMarksArray));
-			System.out.println(Arrays.toString(dbmsMarksArray));
-			System.out.println(Arrays.toString(totalArray));
-			System.out.println(Arrays.toString(averageArray));
-			//---------------------------------------------------
-			
 			
 			System.out.println("Student has been deleted successfully.");
 			System.out.print("Do you want to delete another student (Y/n)?  ");
@@ -430,10 +408,7 @@ class studentManagementSystem {
 		}
 		clearConsole();
 		homePage();
-		
-		
 	}
-	
 	
 //------------------- update Marks -------------------------------------
 
@@ -450,15 +425,12 @@ class studentManagementSystem {
 			}
 			
 			int index = findStudentIndex(stuId);
-			
 			System.out.println("Student Name : "+studentNameArray[index]);
-			
 			
 			if (!isMarksAdded(stuId)){
 				System.out.println("This Student's Marks yet to be Added.");
 				
 			}else{
-				
 				System.out.println("Programming Fundamentals Marks : "+prfMarksArray[index]);
 				System.out.println("Database Management System Marks : "+dbmsMarksArray[index]);
 				
@@ -477,15 +449,6 @@ class studentManagementSystem {
 				
 				System.out.println("Student's Marks have been updated successfully.");
 				
-				
-				//--------------------------------------------------
-				System.out.println(Arrays.toString(studentIdArray));
-				System.out.println(Arrays.toString(studentNameArray));
-				System.out.println(Arrays.toString(prfMarksArray));
-				System.out.println(Arrays.toString(dbmsMarksArray));
-				System.out.println(Arrays.toString(totalArray));
-				System.out.println(Arrays.toString(averageArray));
-				//---------------------------------------------------
 			}
 			
 			System.out.print("Do you want to update another student's Marks (Y/n)?  ");
@@ -499,10 +462,7 @@ class studentManagementSystem {
 		}
 		clearConsole();
 		homePage();
-		
-		
 	}
-	
 	
 //------------------- Update Student Details ---------------------------	
 
@@ -519,13 +479,10 @@ class studentManagementSystem {
 			}
 			
 			int index = findStudentIndex(stuId);
-			
 			System.out.println("Student Name : "+studentNameArray[index]);
-			
 			
 			System.out.print("Enter the new Student Name : ");
 			String stuNewName = input.next();
-			
 			
 			studentNameArray[index] = stuNewName; 
 			System.out.println("Student Details has been updated successfully.");
@@ -543,7 +500,6 @@ class studentManagementSystem {
 			homePage();
 	}
 
-	
 //------------------- add Marks ----------------------------------------
 
 	public static void addMarks(){
@@ -559,13 +515,11 @@ class studentManagementSystem {
 			}
 			
 			int index = findStudentIndex(stuId);
-			
 			if (isMarksAdded(stuId)){
 				System.out.println("This student's marks have been already added.");
                 System.out.println("If you want to update the marks, please use [5] Update Marks option.");
 			}else{
 				System.out.println("Student Name : "+studentNameArray[index]);
-				
 				
 				int prfMarks = getValidMarks("Programming Fundementals ");		
 				int dbmsMarks = getValidMarks("Database Management System ");		
@@ -579,14 +533,6 @@ class studentManagementSystem {
 				
 				sortArrays();
 				findRank();
-				//--------------------------------------------------
-				System.out.println(Arrays.toString(studentIdArray));
-				System.out.println(Arrays.toString(studentNameArray));
-				System.out.println(Arrays.toString(prfMarksArray));
-				System.out.println(Arrays.toString(dbmsMarksArray));
-				System.out.println(Arrays.toString(totalArray));
-				System.out.println(Arrays.toString(averageArray));
-				//---------------------------------------------------
 				
 				System.out.println("Student's Marks have been added successfully.");
 			}
@@ -601,12 +547,9 @@ class studentManagementSystem {
 				addMarks();
 			}
 			clearConsole();
-			homePage();
-			
-			
+			homePage();	
 	}
 
-	
 //------------------- add New Student With Marks -----------------------
 
 	public static void addNewStudentWithMarks(){
@@ -646,22 +589,11 @@ class studentManagementSystem {
 			dbmsMarksArray[nextIndex] = dbmsMarks;
 			totalArray[nextIndex] = total;
 			averageArray[nextIndex] = average;
-			
-				
+		
 			nextIndex++;
 			sortArrays();
 			findRank();
 		
-			//--------------------------------------------------
-			System.out.println(Arrays.toString(studentIdArray));
-			System.out.println(Arrays.toString(studentNameArray));
-			System.out.println(Arrays.toString(prfMarksArray));
-			System.out.println(Arrays.toString(dbmsMarksArray));
-			System.out.println(Arrays.toString(totalArray));
-			System.out.println(Arrays.toString(averageArray));
-			//---------------------------------------------------
-		
-			
 			System.out.println("Student has been added successfully.");
 			System.out.print("Do you want to add a new student (Y/n) ? ");
 			char ch = input.next().charAt(0);
@@ -727,7 +659,6 @@ class studentManagementSystem {
 		homePage();
 	}
 
-
 //------------------- home page ----------------------------------------
 
 	public static void homePage(){
@@ -749,8 +680,7 @@ class studentManagementSystem {
 		System.out.println();
 		System.out.print("\nEnter an Option to Continue > ");
 		int option  = input.nextInt();
-		
-		
+	
 		switch(option) {
 			case 1:
 				clearConsole();
@@ -810,24 +740,21 @@ class studentManagementSystem {
 	
 	}
 
-
 //------------------ clear console -------------------------------------
 	public final static void clearConsole() { 
-	try { 
-		final String os = System.getProperty("os.name"); 
-		if (os.contains("Windows")) { 
-			new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); 
-		}else { 
-			System.out.print("\033[H\033[2J"); 
-			System.out.flush(); 
+		try { 
+			final String os = System.getProperty("os.name"); 
+			if (os.contains("Windows")) { 
+				new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); 
+			}else { 
+				System.out.print("\033[H\033[2J"); 
+				System.out.flush(); 
+			} 
+		} catch (final Exception e) { 
+			e.printStackTrace(); 
+		// Handle any exceptions. 
 		} 
-	} catch (final Exception e) { 
-		e.printStackTrace(); 
-	// Handle any exceptions. 
-	} 
-}
-
-
+	}
 
 //------------------- main method --------------------------------------
 	public static void main (String[] args) {
