@@ -10,9 +10,10 @@ class studentManagementSystem {
 	public static double [] averageArray = new double [0];
 	public static int [] rankArray = new int [0];
 	public static int nextIndex = 0;
-	
+	public static int studentIdCounter = 1;
 
-//------------------------- find Rank -----------------------------
+
+//------------------------- find Rank ----------------------------------
 
 	public static void findRank(){
 		for (int i = 0; i < nextIndex; i++) {
@@ -27,7 +28,7 @@ class studentManagementSystem {
 	}
 
 
-//------------------------- sort Arrays -----------------------------------
+//------------------------- sort Arrays --------------------------------
 
 	public static void sortArrays(){
 		for(int i=nextIndex-1; i >= 0 ; i--){
@@ -179,6 +180,16 @@ class studentManagementSystem {
 		return false;
 	}
 	
+
+//---------------------- Student Id Generate (Auto) --------------------
+
+	public static String generateStudentId() {
+		String id = String.format("S%03d", studentIdCounter);
+		studentIdCounter++;
+		return id;
+	}
+	
+		
 //------------------- Extend Arrays ------------------------------------
 
 	public static void extendArrays(){
@@ -561,8 +572,9 @@ class studentManagementSystem {
 		while(true){
 			String stuId;
 			while(true){
-				System.out.print("Enter Student ID\t: ");
-				stuId = input.next();
+				stuId = generateStudentId();
+				System.out.print("Enter Student ID\t: "+stuId);
+				//stuId = input.next();
 			
 				if(isIdExist(stuId)){
 					System.out.println("The Student ID already exists.");
@@ -572,7 +584,7 @@ class studentManagementSystem {
 					
 			}
 			
-			System.out.print("Enter Student Name\t: ");
+			System.out.print("\nEnter Student Name\t: ");
 			String stuName = input.next();
 			
 		
@@ -619,8 +631,9 @@ class studentManagementSystem {
 		while(true){
 			String stuId;
 			while(true){
-				System.out.print("Enter Student ID\t: ");
-				stuId = input.next();
+				stuId = generateStudentId();
+				System.out.print("Enter Student ID\t: "+stuId);
+				//stuId = input.next();
 			
 				if(isIdExist(stuId)){
 					System.out.println("The Student ID already exists.");
@@ -630,7 +643,7 @@ class studentManagementSystem {
 					
 			}
 			
-			System.out.print("Enter Student Name\t: ");
+			System.out.print("\nEnter Student Name\t: ");
 			String stuName = input.next();
 			
 			extendArrays();
