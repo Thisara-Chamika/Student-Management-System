@@ -13,6 +13,65 @@ class studentManagementSystem {
 	public static int studentIdCounter = 1;
 
 
+//---------------------- find best in Dbms ------------------------------
+
+	public static void sortDbmsMarkArray(){
+		for(int i=nextIndex-1; i >= 0 ; i--){
+			for(int j=0; j<i; j++){
+				if(dbmsMarksArray[j] < dbmsMarksArray[j+1]){
+					int tempPrfMarksArray = prfMarksArray[j];
+					prfMarksArray[j]=prfMarksArray[j+1];
+					prfMarksArray[j+1]=tempPrfMarksArray;
+					
+					String tempStudentIdArray = studentIdArray[j];
+					studentIdArray[j]=studentIdArray[j+1];
+					studentIdArray[j+1]=tempStudentIdArray;
+					
+					String tempStudentNameArray =studentNameArray[j];
+					studentNameArray[j]=studentNameArray[j+1];
+					studentNameArray[j+1]=tempStudentNameArray;
+					
+					int tempDbmsMarksArray = dbmsMarksArray[j];
+					dbmsMarksArray[j]=dbmsMarksArray[j+1];
+					dbmsMarksArray[j+1]=tempDbmsMarksArray;
+				}
+			}
+						
+		}
+	}
+
+
+
+
+//---------------------- find best in Prf ------------------------------
+
+	public static void sortPrfMarksArray(){
+		for(int i=nextIndex-1; i >= 0 ; i--){
+			for(int j=0; j<i; j++){
+				if(prfMarksArray[j] < prfMarksArray[j+1]){
+					int tempPrfMarksArray = prfMarksArray[j];
+					prfMarksArray[j]=prfMarksArray[j+1];
+					prfMarksArray[j+1]=tempPrfMarksArray;
+					
+					String tempStudentIdArray = studentIdArray[j];
+					studentIdArray[j]=studentIdArray[j+1];
+					studentIdArray[j+1]=tempStudentIdArray;
+					
+					String tempStudentNameArray =studentNameArray[j];
+					studentNameArray[j]=studentNameArray[j+1];
+					studentNameArray[j+1]=tempStudentNameArray;
+					
+					int tempDbmsMarksArray = dbmsMarksArray[j];
+					dbmsMarksArray[j]=dbmsMarksArray[j+1];
+					dbmsMarksArray[j+1]=tempDbmsMarksArray;
+				}
+			}
+						
+		}
+	}
+
+
+
 //------------------------- find Rank ----------------------------------
 
 	public static void findRank(){
@@ -234,6 +293,8 @@ class studentManagementSystem {
 		System.out.println("|ID    |Student's Name     |Dbms Marks   |prf Marks   |");
 		System.out.println("+------+-------------------+-------------+------------+");
 		
+		sortDbmsMarkArray();
+		
 		for (int i = 0; i < nextIndex; i++){
 			if (totalArray[i]!=0){
 				System.out.printf("|%6s|%19s|%13d|%12d|",studentIdArray[i],studentNameArray[i],dbmsMarksArray[i],prfMarksArray[i]);
@@ -250,6 +311,7 @@ class studentManagementSystem {
 					clearConsole();
 					homePage();
 				}
+				System.exit(0);
 	}
 	
 //------------------- Best in Programming Fundementals -----------------
@@ -264,6 +326,8 @@ class studentManagementSystem {
 		System.out.println("+------+-------------------+------------+------------+");
 		System.out.println("|ID    |Student's Name     |Prf Marks   |Dbms Marks  |");
 		System.out.println("+------+-------------------+------------+------------+");
+		
+		sortPrfMarksArray();
 		
 		for (int i = 0; i < nextIndex; i++){
 			if (totalArray[i]!=0){
@@ -281,7 +345,7 @@ class studentManagementSystem {
 					clearConsole();
 					homePage();
 				}
-		
+		System.exit(0);
 	}
 
 	
