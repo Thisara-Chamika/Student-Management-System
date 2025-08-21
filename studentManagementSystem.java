@@ -358,6 +358,8 @@ class studentManagementSystem {
 		System.out.println();
 		System.out.println();
 		
+		findRank();
+		
 		System.out.println("+------+------+-------------------+--------------+--------------+");
 		System.out.println("|Rank  |ID    |Student's Name     |Total Marks   |Avg. Marks    |");
 		System.out.println("+------+------+-------------------+--------------+--------------+");
@@ -468,8 +470,6 @@ class studentManagementSystem {
 			nextIndex--;
 			
 			narrowArray();
-			sortArrays();
-			findRank();
 			
 			System.out.println("Student has been deleted successfully.");
 			System.out.print("Do you want to delete another student (Y/n)?  ");
@@ -518,10 +518,7 @@ class studentManagementSystem {
 				dbmsMarksArray[index] = dbmsMarks;
 				totalArray[index] = total;
 				averageArray[index] = average;
-				
-				sortArrays();
-				findRank();
-				
+			
 				System.out.println("Student's Marks have been updated successfully.");
 				
 			}
@@ -606,9 +603,6 @@ class studentManagementSystem {
 				totalArray[index] = total;
 				averageArray[index] = average;
 				
-				sortArrays();
-				findRank();
-				
 				System.out.println("Student's Marks have been added successfully.");
 			}
 			
@@ -638,7 +632,6 @@ class studentManagementSystem {
 			while(true){
 				stuId = generateStudentId();
 				System.out.print("Enter Student ID\t: "+stuId);
-				//stuId = input.next();
 			
 				if(isIdExist(stuId)){
 					System.out.println("The Student ID already exists.");
@@ -667,8 +660,6 @@ class studentManagementSystem {
 			averageArray[nextIndex] = average;
 		
 			nextIndex++;
-			sortArrays();
-			findRank();
 		
 			System.out.println("Student has been added successfully.");
 			System.out.print("Do you want to add a new student (Y/n) ? ");
@@ -697,7 +688,6 @@ class studentManagementSystem {
 			while(true){
 				stuId = generateStudentId();
 				System.out.print("Enter Student ID\t: "+stuId);
-				//stuId = input.next();
 			
 				if(isIdExist(stuId)){
 					System.out.println("The Student ID already exists.");
@@ -720,7 +710,6 @@ class studentManagementSystem {
 			averageArray[nextIndex] = 0;
 			
 			nextIndex++;
-			sortArrays();
 			
 			System.out.println("Student has been added successfully.");
 			System.out.print("Do you want to add a new student (Y/n) ? ");
